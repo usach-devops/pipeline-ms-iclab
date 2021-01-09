@@ -1,0 +1,31 @@
+def call() {
+
+    figlet 'Continuous-Delivery'
+    
+    stage('gitDiff') {
+        echo "Mostrar por pantalla las diferencias entre la rama release en curso y la rama master"
+    }
+    stage("downloadNexus"){     
+        bat 'curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar -O' 
+    }
+
+    stage('runDownloadedJar') {
+            sh "gradle bootRun &"
+            sh 'sleep 200'
+    }
+
+    stage('test-rest') {
+        sh "curl -X GET localhost:8085/rest/mscovid/test?msg=testing -O  && dir"
+    }
+    
+    stage('gitMergeMaster') {
+        echo "Realizar merge directo hacia la rama master"
+    }
+    
+    stage('gitMergeDevelop') {
+        echo "Realizar merge directo hacia rama develop."
+    }
+    stage('gitTagMaster') {
+        echo "Crear tag de rama release en rama master."
+    }
+}
