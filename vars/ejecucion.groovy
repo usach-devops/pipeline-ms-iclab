@@ -1,22 +1,34 @@
-def call() {
+def call(){
+
     pipeline {
         agent any
+        
         stages {
             stage('Pipeline') {
                 steps {
                     script {
-                        echo 'INICIO PIPELINE'
+                        
+                        figlet 'Gradle'
+                        figlet env.GIT_BRANCH
+                        
+                        if(env.GIT_BRANCH =='develop')
+                        {
+                         gradleci.call()
+                        } 
+                        if(env.GIT_BRANCH.contains('feature'))
+                        {
+                         gradleci.call()
+                        }
+                        if(env.GIT_BRANCH.contains('release'))
+                        {
+                         gradlecd.call()
+                        }
                     }
                 }
             }
         }
-        post {
-            success {
-                echo 'PIPELINE OK'        }
-            failure {
-                echo 'PIPELINE ERROR'        }
-        }
     }
+
 }
 
-return this
+return this;
