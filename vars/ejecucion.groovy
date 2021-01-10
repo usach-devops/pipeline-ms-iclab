@@ -6,6 +6,13 @@ def call() {
                 steps {
                     script {
                         echo 'INICIO PIPELINE'
+                        def tool = buildtool.get()
+
+                        if (tool == 'maven') {
+                            echo 'Build tool es MAVEN'
+                        }else {
+                            echo 'Build tool es Gradle'
+                        }
                     }
                 }
             }
