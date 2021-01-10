@@ -1,5 +1,3 @@
-import com.usachpipeline
-
 def call() {
     pipeline {
         agent any
