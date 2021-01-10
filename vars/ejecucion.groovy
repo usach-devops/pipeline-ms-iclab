@@ -1,3 +1,5 @@
+package com.usachpipeline
+
 def call() {
     pipeline {
         agent any
@@ -6,6 +8,13 @@ def call() {
                 steps {
                     script {
                         echo 'INICIO PIPELINE'
+                        BuildToolType buildtool = buildtool.get()
+
+                        if(buildtool == BuildToolType.Maven){
+                            echo 'Buld tool es MAVEN'
+                        }else{
+                            echo 'Buld tool es Gradle'
+                        }
                     }
                 }
             }

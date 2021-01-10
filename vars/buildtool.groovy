@@ -1,6 +1,6 @@
 package com.usachpipeline
 
-def get(){
+BuildToolType get(){
    if (fileExists('build.gradle')) {
       return BuildToolType.Gradle
    }
