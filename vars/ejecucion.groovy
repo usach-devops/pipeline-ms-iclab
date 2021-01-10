@@ -8,7 +8,7 @@ def call() {
                 steps {
                     script {
                         echo 'INICIO PIPELINE'
-                        BuildToolType buildtool = buildtool.get()
+                        def buildtool = buildtool.get()
 
                         if(buildtool == BuildToolType.Maven){
                             echo 'Buld tool es MAVEN'
