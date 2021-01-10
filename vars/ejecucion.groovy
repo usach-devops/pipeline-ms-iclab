@@ -1,4 +1,4 @@
-package com.usachpipeline
+import com.usachpipeline
 
 def call() {
     pipeline {
