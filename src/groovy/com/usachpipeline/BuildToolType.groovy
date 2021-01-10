@@ -1,4 +1,0 @@
-enum BuildToolType{
-  Maven,
-  Gradle
-}
