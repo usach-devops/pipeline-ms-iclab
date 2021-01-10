@@ -1,29 +1,61 @@
-def call() {
+def call(){
     pipeline {
         agent any
+	    
+	parameters {
+	    string(name: 'stage', defaultValue: '', description: 'Eleccion de stages') 
+	} 
+
         stages {
             stage('Pipeline') {
                 steps {
-                    script {
-                        echo 'INICIO PIPELINE'
+                   script {
+						   
+			figlet env.GIT_BRANCH
                         def tool = buildtool.get()
+			   
+			if (tool == 'gradle') {
 
-                        if (tool == 'maven') {
-                            echo 'Build tool es MAVEN'
-                        }else {
-                            echo 'Build tool es Gradle'
-                        }
-                    }
+				if(env.GIT_BRANCH =='develop')
+				{
+				println 'llamar a gradleci'	
+				 //gradleci.call()
+				} 
+				if(env.GIT_BRANCH.contains('feature'))
+				{
+				println 'llamar a gradleci'
+				 //gradleci.call()
+				}
+				if(env.GIT_BRANCH.contains('release'))
+				{
+				println 'llamar a gradlecd' 
+				//gradlecd.call()
+				}
+			}
+			
+			if (tool == 'maven') {
+				
+				if(env.GIT_BRANCH =='develop')
+				{
+				println 'llamar a mavenci'		
+				 //mavenci.call()
+				} 
+				if(env.GIT_BRANCH.contains('feature'))
+				{
+				println 'llamar a mavenci'
+				 //mavenci.call()
+				}
+				if(env.GIT_BRANCH.contains('release'))
+				{
+				println 'llamar a mavencd'
+				 //mavencd.call()
+				}
+			}
+                   }  
                 }
             }
-        }
-        post {
-            success {
-                echo 'PIPELINE OK'        }
-            failure {
-                echo 'PIPELINE ERROR'        }
         }
     }
 }
 
-return this
+return this;
