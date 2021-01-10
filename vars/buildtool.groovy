@@ -6,6 +6,6 @@ def get(){
    if (fileExists('pom.xml')) {
       return  'maven'
    }
-   error "Archivo ${archivo} no existe. No se puede construir pipeline basado en ${params.buildtool}"
+   error "Archivo de compilación no existe. No se puede construir pipeline."
 }
 return this
