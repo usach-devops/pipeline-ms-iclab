@@ -12,10 +12,9 @@ def getBranchName() {
 
 //USO : if (validate.isBranchName('develop')) {}
 def isBranchName(String branchName) {
-    if (env.GIT_BRANCH == env.GIT_BRANCH) {
-        return true;
-    }
-    return false;
+
+    return env.GIT_BRNACH==env.GIT_BRANCH
+
 
 }
 
