@@ -1,6 +1,4 @@
-package com.usachpipeline
-
-BuildToolType get(){
+def get(){
    if (fileExists('build.gradle')) {
       return BuildToolType.Gradle
    }
@@ -10,3 +8,4 @@ BuildToolType get(){
    }
    error "Archivo ${archivo} no existe. No se puede construir pipeline basado en ${params.buildtool}"
 }
+return this
