@@ -23,8 +23,5 @@ def isBranchName(String branchName) {
 //release-v{major}-{minor}-{patch}
 //USO :  if (validate.validateReleaseNameFormat('release-v1-0-0')) {  echo 'OK' }
 def validateReleaseNameFormat(String releaseName) {
-    if (releaseName =~ /^(release-v[0-9]+)\-([0-9]+)\-([0-9]+)?$/) { // false
-        return true;
-    } 
-    return false;
+    return releaseName =~ /^(release-v[0-9]+)\-([0-9]+)\-([0-9]+)?$/
 }
