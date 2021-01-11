@@ -11,12 +11,13 @@ def call() {
                         figlet env.GIT_BRANCH
                         println 'branch detectado ' + branchName
 
-                        error 'error 2 prueba'
+                        
 
                         switch (branchName) {
                            case ['develop', 'feature']:
 
                                 pipelineci.execute()
+                                error 'error 2 prueba'
                                 break
                            case 'release':
                                 pipelinecd.execute()
