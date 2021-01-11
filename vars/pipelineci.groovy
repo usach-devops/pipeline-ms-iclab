@@ -2,9 +2,9 @@ def execute() {
     def tool = buildtool.get()
 
     if (tool == 'gradle') {
-        println 'run gradle ci'
-        } else {
-        println 'run maven ci'
+        gradleci.execute();
+    } else {
+        mavenci.execute();
     }
 }
 return this

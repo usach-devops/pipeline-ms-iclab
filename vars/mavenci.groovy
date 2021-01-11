@@ -1,5 +1,5 @@
 def execute() {
-	println 'run cd pipeline'
+    println 'run maven ci'
 
     stage('compile') {
         env.JENKINS_STAGE = env.STAGE_NAME

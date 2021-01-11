@@ -1,27 +1,31 @@
 def execute() {
-	println 'run cd pipeline'
+    println 'run gradle ci'
 
-    stage('compile') {
+    stage('gitDiff') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
     }
-    stage('unitTest') {
+    stage('nexusDownload') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
     }
-    stage('jar') {
+    stage('run') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
     }
-    stage('sonar') {
+    stage('test') {
         env.JENKINS_STAGE = env.STAGE_NAME
          echo env.JENKINS_STAGE
     }
-    stage('nexusUpload') {
+    stage('gitMergeMaster') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
     }
-    stage('gitCreateRelease') {
+    stage('gitMergeDevelop') {
+        env.JENKINS_STAGE = env.STAGE_NAME
+        echo env.JENKINS_STAGE
+    }
+    stage('gitTagMaster') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
     }
