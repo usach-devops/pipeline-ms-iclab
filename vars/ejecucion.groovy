@@ -9,6 +9,7 @@ def call() {
                         def branchName = validate.getBranchName()
 
                         figlet env.GIT_BRANCH
+                        println 'branch detectado ' + branchName
 
                         switch (branchName) {
                            case ['develop', 'feature']:
@@ -17,13 +18,14 @@ def call() {
 
                                 break
                            case 'release':
+
                                 pipelinecd.execute()
 
                                 break
 
                            default:
 
-                           error "Nombre de branch no cumple con las convenciones de gitflow"
+                           error 'Nombre de branch no cumple con las convenciones de gitflow'
 }
 
                            break

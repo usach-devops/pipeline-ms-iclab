@@ -4,13 +4,13 @@
 
 def getBranchName() {
 
-    def branches = ["develop", "main"];
+    def branches = ['develop', 'main'];
 
    if(branches.contains(env.GIT_BRNACH){
        return env.GIT_BRNACH
    }
 
-   if(env.GIT_BRNACH =~ /feature*/ ){
+   if (env.GIT_BRNACH =~ /feature*/ ){
        return "feature"
    }
 
