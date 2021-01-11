@@ -42,7 +42,7 @@ def call() {
                 script {
                     echo 'env.ERROR_MESSAGE ='+env.ERROR_MESSAGE
                     //mensaje de error por defecto
-                    if (env.ERROR_MESSAGE == '') {
+                    if (env.ERROR_MESSAGE == '' || env.ERROR_MESSAGE == null) {
                         notification.failure();
                     }else {
                         //cuando se agrega un mensaje "personalizado"
