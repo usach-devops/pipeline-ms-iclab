@@ -6,11 +6,14 @@ def getBranchName() {
 
     def branches = ['develop', 'main'];
 
+    def branch = env.GIT_BRANCH
+
    if(branches.contains(env.GIT_BRNACH){
        return env.GIT_BRNACH
    }
 
-   if (env.GIT_BRNACH =~ /feature*/ ){
+    if(true)
+   {
        return "feature"
    }
 
@@ -18,6 +21,12 @@ def getBranchName() {
    {
        return "release"
    }
+
+}
+
+def isFeatureBranch() {
+
+    return branchName==env.GIT_BRANCH
 
 }
 
