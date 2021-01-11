@@ -7,7 +7,7 @@ def getBranchName() {
     def branch = env.GIT_BRANCH
 
     if (branches.contains(branch)) {
-        return env.GIT_BRNACH
+        return branch
     }
 
     if (isFeature(branch)) {
