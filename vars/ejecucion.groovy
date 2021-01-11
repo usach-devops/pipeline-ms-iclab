@@ -40,6 +40,7 @@ def call() {
             }
             failure {
                 script {
+                    echo 'env.ERROR_MESSAGE ='+env.ERROR_MESSAGE
                     //mensaje de error por defecto
                     if (env.ERROR_MESSAGE == '') {
                         notification.failure();
