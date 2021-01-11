@@ -19,8 +19,9 @@ def call() {
                            case 'release':
                                 pipelinecd.execute()
                                 break
-                           default:
-                                error 'Nombre de branch no cumple con las convenciones de gitflow'
+                           default: 
+                                env.ERROR_MESSAGE = 'Nombre de branch no cumple con las convenciones de gitflow'
+                                error env.ERROR_MESSAGE
                                 break
                         }
                     }
@@ -29,5 +30,20 @@ def call() {
         }
     }
 }
+
+    post {
+        success {
+            notification.success();
+        }
+        failure {
+            //mensaje de error por defecto
+            if (env.ERROR_MESSAGE == '') {
+                notification.failure();
+            }else {
+                //cuando se agrega un mensaje "personalizado"
+                notification.failure(env.ERROR_MESSAGE);
+            }
+        }
+    }
 
 return this
