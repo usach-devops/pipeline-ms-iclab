@@ -31,15 +31,19 @@ def call() {
 
         post {
             success {
-                notification.success();
+                script {
+                    notification.success();
+                }
             }
             failure {
-                //mensaje de error por defecto
-                if (env.ERROR_MESSAGE == '') {
-                    notification.failure();
-                }else {
-                    //cuando se agrega un mensaje "personalizado"
-                    notification.failure(env.ERROR_MESSAGE);
+                script {
+                    //mensaje de error por defecto
+                    if (env.ERROR_MESSAGE == '') {
+                        notification.failure();
+                    }else {
+                        //cuando se agrega un mensaje "personalizado"
+                        notification.failure(env.ERROR_MESSAGE);
+                    }
                 }
             }
         }
