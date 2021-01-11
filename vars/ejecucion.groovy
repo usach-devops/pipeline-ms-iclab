@@ -11,6 +11,9 @@ def call() {
                         figlet env.GIT_BRANCH
                         println 'branch detectado ' + branchName
 
+                        env.ERROR_MESSAGE = 'test error !!'
+                        error env.ERROR_MESSAGE
+
                         switch (branchName) {
                            case ['develop', 'feature']:
 
@@ -20,6 +23,7 @@ def call() {
                                 pipelinecd.execute()
                                 break
                            default: 
+                                //Quizás existe una mejor forma de hacer esto
                                 env.ERROR_MESSAGE = 'Nombre de branch no cumple con las convenciones de gitflow'
                                 error env.ERROR_MESSAGE
                                 break
