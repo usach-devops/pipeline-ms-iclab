@@ -15,20 +15,13 @@ def call() {
                            case ['develop', 'feature']:
 
                                 pipelineci.execute()
-
                                 break
                            case 'release':
-
                                 pipelinecd.execute()
-
                                 break
-
                            default:
-
-                           error 'Nombre de branch no cumple con las convenciones de gitflow'
-}
-
-                           break
+                                error 'Nombre de branch no cumple con las convenciones de gitflow'
+                                break
                         }
                     }
                 }
@@ -36,4 +29,5 @@ def call() {
         }
     }
 }
+
 return this
