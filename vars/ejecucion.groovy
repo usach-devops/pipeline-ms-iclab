@@ -11,8 +11,7 @@ def call() {
                         figlet env.GIT_BRANCH
                         println 'branch detectado ' + branchName
 
-                        env.ERROR_MESSAGE = 'test error !!'
-                        error env.ERROR_MESSAGE
+                        error 'error 2 prueba'
 
                         switch (branchName) {
                            case ['develop', 'feature']:
