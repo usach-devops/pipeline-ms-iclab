@@ -4,7 +4,7 @@ def execute() {
     stage('compile') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
-        sh 'mvn clean compile -e'
+        sh './mvnw clean compile -e'
     }
     stage('unitTest') {
         env.JENKINS_STAGE = env.STAGE_NAME
