@@ -1,4 +1,5 @@
 def execute() {
+    def branchName = validate.getBranchName()
     println 'run maven ci'
 
     stage('compile') {
@@ -33,14 +34,13 @@ def execute() {
         mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]]
     }
 
-    stage('gitCreateRelease') {
-        def branchName = validate.getBranchName()
-
-        if (branchName ==~ /(develop)/) {
+    if (branchName == 'develop') {
+        stage('gitCreateRelease') {
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
         }
     }
 
 }
+
 return this
