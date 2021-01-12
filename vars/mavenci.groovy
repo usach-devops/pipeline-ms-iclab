@@ -34,9 +34,12 @@ def execute() {
     }
 
     stage('gitCreateRelease') {
-        when { branch "develop" }
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
+        def branchName = validate.getBranchName()
+
+        if (branchName ==~ /(develop)/) {
+            env.JENKINS_STAGE = env.STAGE_NAME
+            echo env.JENKINS_STAGE
+        }
     }
 
 }
