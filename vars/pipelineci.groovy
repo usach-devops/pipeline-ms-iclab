@@ -3,10 +3,12 @@ def execute() {
 
     if (tool == 'gradle') {
         env.BUILD_TOOL = 'gradle'
-        println 'run gradle ci'
+        println env.BUILD_TOOL
+        gradleci.execute();
     } else {
         env.BUILD_TOOL = 'maven'
-        println 'run maven ci'
-    }
+        println env.BUILD_TOOL
+        mavenci.execute();
+    } 
 }
 return this
