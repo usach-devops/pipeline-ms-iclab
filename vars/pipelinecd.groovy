@@ -17,15 +17,16 @@ def execute() {
 	//Ejecutar artefacto descargado.
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
-	//falta el directorio local del job-nexus
-        //sh 'java -jar DevOpsUsach2020-0.0.1.jar &'
+	//cd '/var/jenkins_home/workspace/ci-cd/cd-pipeline'
+        sh 'java -jar DevOpsUsach2020-0.0.1.jar &'
+	sh 'sleep 20'
 
     }
 	
     stage('Test') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
-        sh 'curl -X GET http://localhost:8081/rest/mscovid/test?msg=testing'
+        sh 'curl -X GET http://localhost:8085/rest/mscovid/test?msg=testing'
     }
 	
     stage('gitMergeMaster') {
