@@ -4,7 +4,7 @@ def execute() {
     stage('gitDiff') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
-        sh 'git diff origin/main..' + env.BRANCH_NAME
+        sh 'git diff origin/main..' + env.GIT_BRANCH
     }
     stage('nexusDownload') {
         env.JENKINS_STAGE = env.STAGE_NAME
