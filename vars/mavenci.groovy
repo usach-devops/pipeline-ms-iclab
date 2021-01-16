@@ -95,7 +95,8 @@ def executeError(e) {
     error message
     //error para output del pipeline mas detallado
     //throw new Exception("${env.ERROR_MESSAGE} ${e.toString()}");
-    echo e.toString()
+    echo "OUTPUT ERROR ${e.toString()}"
+    println("OUTPUT ERROR "+e.toString());
 }
 
 return this
