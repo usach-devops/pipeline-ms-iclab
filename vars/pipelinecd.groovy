@@ -26,7 +26,7 @@ def execute() {
     stage('Test') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
-        sh 'curl -X GET http://localhost:8085/rest/mscovid/test?msg=testing'
+        sh 'curl -X GET http://localhost:8081/rest/mscovid/test?msg=testing'
     }
 	
     stage('gitMergeMaster') {
