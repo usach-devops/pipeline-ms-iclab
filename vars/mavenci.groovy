@@ -37,8 +37,18 @@ def execute() {
         try{
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
-            withSonarQubeEnv(installationName: 'sonar-server') {
-                sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+            def scannerHome = tool 'sonar-scanner';
+            echo "scannerHome = ${scannerHome}"
+            echo "JOB = ${env.JOB_NAME}"
+            echo "RAMA = ${env.GIT_BRANCH}"
+            echo "BUILD =${env.BUILD_NUMBER}"
+            
+            def reponame = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
+            echo "reponame =${reponame}"
+            
+            
+            withSonarQubeEnv(installationName: 'sonar-server') {        
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${reponame}-${env.GIT_BRANCH}-${env.BUILD_NUMBER} -Dsonar.java.binaries=build"
             }
         }catch (Exception e){
             executeError(e)
