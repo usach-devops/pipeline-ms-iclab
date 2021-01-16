@@ -43,6 +43,10 @@ def execute() {
             echo "RAMA = ${env.GIT_BRANCH}"
             echo "BUILD =${env.BUILD_NUMBER}"
             
+            define reponame = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
+            echo "reponame =${reponame}"
+            
+            
             withSonarQubeEnv(installationName: 'sonar-server') {
                 //sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'              
                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${env.GIT_BRANCH}-${env.BUILD_NUMBER} -Dsonar.java.binaries=build"
