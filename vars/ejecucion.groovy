@@ -1,3 +1,4 @@
+import pipeline.*
 def call() {
     pipeline {
         agent any
@@ -6,6 +7,9 @@ def call() {
             stage('Pipeline') {
                 steps {
                     script {
+						def tech = new test.validateTech()
+						println 'Tecnologia: ' + tech.get()
+						
                         def branchName = validate.getBranchName()
 
                         figlet env.GIT_BRANCH
