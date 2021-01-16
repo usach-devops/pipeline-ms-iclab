@@ -3,7 +3,7 @@ def execute() {
     println 'run maven cd'
 
     stage('gitDiff') {
-        git.gitDiff()
+        git.diff()
     
     }
     stage('nexusDownload') {
