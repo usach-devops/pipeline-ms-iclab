@@ -37,7 +37,7 @@ def execute() {
         try{
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
-            def scannerHome = tool 'sonar-scanner';
+            def scannerHome = tool 'sonar-server';
             cho "scannerHome = ${scannerHome}"
             
             withSonarQubeEnv(installationName: 'sonar-server') {
