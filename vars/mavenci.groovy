@@ -40,16 +40,27 @@ def execute() {
             withSonarQubeEnv(installationName: 'sonar-server') {
                 sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
             }
-            timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-                def qg = waitForQualityGate webhookSecretId: 'DevOps2020' // Reuse taskId previously collected by withSonarQubeEnv
-                if (qg.status != 'OK') {
-                    throw new Exception("Pipeline aborted due to quality gate failure: ${qg.status}");
-                }
-            }
+            // timeout(time: 15, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
+            //     def qg = waitForQualityGate webhookSecretId: 'DevOps2020' // Reuse taskId previously collected by withSonarQubeEnv
+            //     echo "Status: ${qg.status}"
+            //     if (qg.status != 'OK') {
+            //         throw new Exception("Pipeline aborted due to quality gate failure: ${qg.status}");
+            //     }
+            // }
         }catch (Exception e){
             allStagesPassed = false
         }
     }
+
+      stage("Quality Gate"){
+            timeout(time: 15, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
+                def qg = waitForQualityGate webhookSecretId: 'DevOps2020' // Reuse taskId previously collected by withSonarQubeEnv
+                echo "Status: ${qg.status}"
+                if (qg.status != 'OK') {
+                    throw new Exception("Pipeline aborted due to quality gate failure: ${qg.status}");
+                }
+            }
+      }
 
 
     stage('nexusUpload') {
