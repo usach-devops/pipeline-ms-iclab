@@ -40,7 +40,7 @@ def execute() {
             def scannerHome = tool 'sonar-scanner';
             echo "scannerHome = ${scannerHome}"
             echo "JOB = ${env.JOB_NAME}"
-            echo "RAMA = ${env.env.GIT_BRANCH}"
+            echo "RAMA = ${env.GIT_BRANCH}"
             echo "BUILD =${env.BUILD_NUMBER}"
             
             withSonarQubeEnv(installationName: 'sonar-server') {
