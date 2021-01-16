@@ -24,6 +24,10 @@ def call() {
                            case 'release':
                                 pipelinecd.execute()
                                 break
+                            case 'main':
+                                env.ERROR_MESSAGE = 'Branch main no tiene pipeline'
+                                error env.ERROR_MESSAGE
+                                break
                            default: 
                                 //Quizás existe una mejor forma de hacer esto
                                 env.ERROR_MESSAGE = 'Nombre de branch no cumple con las convenciones de gitflow'

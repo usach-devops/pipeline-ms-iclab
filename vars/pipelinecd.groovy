@@ -3,8 +3,7 @@ def execute() {
     println 'run maven cd'
 
     stage('gitDiff') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
+        git.diff()
     
     }
     stage('nexusDownload') {
