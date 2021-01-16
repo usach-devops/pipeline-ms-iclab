@@ -30,7 +30,7 @@ def call() {
                                 break
                            default: 
                                 //Quizás existe una mejor forma de hacer esto
-                                env.ERROR_MESSAGE = 'Nombre de branch no cumple con las convenciones de gitflow'
+                                env.ERROR_MESSAGE = 'Nombre de branch  '+ branchName +'no cumple con las convenciones de gitflow'
                                 error env.ERROR_MESSAGE
                                 break
                         }
