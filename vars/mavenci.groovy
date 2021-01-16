@@ -38,10 +38,11 @@ def execute() {
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
             def scannerHome = tool 'sonar-scanner';
+            cho "scannerHome = ${scannerHome}"
             
             withSonarQubeEnv(installationName: 'sonar-server') {
                 //sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-                sh '${scannerHome}\bin\sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build'
+                sh '${scannerHome}\\bin\\sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build'
             }
         }catch (Exception e){
             executeError(e)
