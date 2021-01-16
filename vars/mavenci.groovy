@@ -1,8 +1,11 @@
+import pipeline.*
+
 def execute() {
     def branchName = validate.getBranchName()
     //boolean allStagesPassed = true;
 
     println 'run maven ci'
+    def estado = "OK"
 
     stage('compile') {
         try{
@@ -86,11 +89,19 @@ def execute() {
         }
     }
 
-    if (branchName == 'develop') {
+    if (branchName == 'develop' && estado=="OK") {
         stage('gitCreateRelease') {
             try {
                 env.JENKINS_STAGE = env.STAGE_NAME
                 echo env.JENKINS_STAGE
+                def git = new git.GitMethods()
+
+                if (git.checkIfBranchExists('release-v9-9-9')) {
+                    git.deleteBranch('release-v9-9-9')
+                    git.createBranch(branchName, 'release-v9-9-9')
+                } else {
+                    git.createBranch(branchName, 'release-v9-9-9')
+                }
             }catch (Exception e){
                 executeError(e)
             }
@@ -100,6 +111,7 @@ def execute() {
 }
 
 def executeError(e) {
+    estado = "error"
     //error para output del pipeline mas detallado
     echo "OUTPUT ERROR ${e.toString()}"
     //Error para slack desde post actions en ejecucion.groovy
