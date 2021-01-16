@@ -10,7 +10,7 @@ def execute() {
             echo env.JENKINS_STAGE
             sh './mvnw clean compile -e'
         }catch (Exception e){
-            throw new Exception("Pipeline aborted due compile stage failure: ${e.toString()}");
+            executeError(e)
         }
 
     }
@@ -20,7 +20,7 @@ def execute() {
             echo env.JENKINS_STAGE
             sh './mvnw clean test -e'
         }catch (Exception e){
-            throw new Exception("Pipeline aborted due unitTest stage failure: ${e.toString()}");
+            executeError(e)
         }
     }
     stage('jar') {
@@ -29,7 +29,7 @@ def execute() {
             echo env.JENKINS_STAGE
             sh './mvnw clean package -e'
         }catch (Exception e){
-            throw new Exception("Pipeline aborted due jar stage failure: ${e.toString()}");
+            executeError(e)
         }
 
     }
@@ -41,7 +41,7 @@ def execute() {
                 sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
             }
         }catch (Exception e){
-            allStagesPassed = false
+            executeError(e)
         }
     }
 
@@ -57,7 +57,7 @@ def execute() {
                 }
             }
         }catch (Exception e){
-            throw new Exception("Pipeline aborted due Quality Gate stage failure: ${e.toString()}");
+            executeError(e)
         }
     }
 
@@ -72,17 +72,29 @@ def execute() {
             packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: 'build/DevOpsUsach2020-0.0.1.jar']], 
             mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]]
         }catch (Exception e){
-            throw new Exception("Pipeline aborted due nexusUpload stage failure: ${e.toString()}");
+            executeError(e)
         }
     }
 
     if (branchName == 'develop') {
         stage('gitCreateRelease') {
-            env.JENKINS_STAGE = env.STAGE_NAME
-            echo env.JENKINS_STAGE
+            try {
+                env.JENKINS_STAGE = env.STAGE_NAME
+                echo env.JENKINS_STAGE
+            }catch (Exception e){
+                executeError(e)
+            }
         }
     }
 
+}
+
+def executeError(e) {
+    //Error para slack
+    env.ERROR_MESSAGE = "Pipeline aborted due ${env.JENKINS_STAGE} stage failure"
+    error env.ERROR_MESSAGE
+    //error para output del pipeline mas detallado
+    throw new Exception("${env.ERROR_MESSAGE} ${e.toString()}");
 }
 
 return this
