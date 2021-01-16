@@ -6,7 +6,8 @@ def failure() {
 }
 
 def failure(msg) {
-    slackSend color: "danger", message: "Build Failure: ${msg}", teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
+    def template = "Build Failure: [devops-usach-grupo2][Proyecto ${env.BUILD_TOOL}]";
+    slackSend color: "danger", message: "Build Failure: ${template} ${msg}", teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
 }
 
 def success() {
@@ -15,5 +16,6 @@ def success() {
 }
 
 def success(msg) {
-    slackSend color: "good", message: "Build Success: ${msg}", teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
+    def template = "Build Success: [devops-usach-grupo2][Proyecto ${env.BUILD_TOOL}]";
+    slackSend color: "good", message: "Build Success: ${template} ${msg}", teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
 }
