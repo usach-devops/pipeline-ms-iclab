@@ -90,13 +90,15 @@ def execute() {
 }
 
 def executeError(e) {
+    echo "OUTPUT ERROR ${e.toString()}"
+    println("OUTPUT ERROR "+e.toString());
+    
     //Error para slack
     def message = env.ERROR_MESSAGE == '' || env.ERROR_MESSAGE == null ? "[Stage ${env.JENKINS_STAGE}] Pipeline aborted due stage failure" : env.ERROR_MESSAGE 
     error message
     //error para output del pipeline mas detallado
     //throw new Exception("${env.ERROR_MESSAGE} ${e.toString()}");
-    echo "OUTPUT ERROR ${e.toString()}"
-    println("OUTPUT ERROR "+e.toString());
+
 }
 
 return this
