@@ -56,7 +56,7 @@ def execute() {
         try{
             sleep(10)
             timeout(time: 15, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
-                def qg = waitForQualityGate // Reuse taskId previously collected by withSonarQubeEnv
+                def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
                 echo "Status: ${qg.status}"
                 if (qg.status != 'OK') {
                     throw new Exception("Pipeline aborted due to quality gate failure: ${qg.status}");
