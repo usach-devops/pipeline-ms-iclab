@@ -19,7 +19,7 @@ def execute() {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
 		//falta el directorio local del job-nexus  {
-    //sh 'java -jar DevOpsUsach2020-0.0.1.jar &'
+               //sh 'java -jar DevOpsUsach2020-0.0.1.jar &'
 
     }
 	
