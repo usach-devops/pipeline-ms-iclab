@@ -6,7 +6,7 @@ def failure() {
 }
 
 def failure(msg) {
-    def template = "Build Success: [devops-usach-grupo2][Proyecto ${env.BUILD_TOOL}]";
+    def template = "Build Failure: [devops-usach-grupo2][Proyecto ${env.BUILD_TOOL}]";
     slackSend color: "danger", message: "Build Failure: ${template} ${msg}", teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
 }
 
