@@ -1,29 +1,14 @@
 def execute() {
-	println 'run cd pipeline'
+    def tool = buildtool.get()
 
-    stage('compile') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
-    }
-    stage('unitTest') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
-    }
-    stage('jar') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
-    }
-    stage('sonar') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-         echo env.JENKINS_STAGE
-    }
-    stage('nexusUpload') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
-    }
-    stage('gitCreateRelease') {
-        env.JENKINS_STAGE = env.STAGE_NAME
-        echo env.JENKINS_STAGE
-    }
+    if (tool == 'gradle') {
+        env.BUILD_TOOL = 'gradle'
+        println env.BUILD_TOOL
+        gradlecd.execute();
+    } else {
+        env.BUILD_TOOL = 'maven'
+        println env.BUILD_TOOL
+        mavencd.execute();
+    } 
 }
 return this
