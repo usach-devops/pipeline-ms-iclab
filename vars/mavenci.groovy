@@ -63,7 +63,7 @@ def execute() {
                 }
             }
         }catch (Exception e){
-            error e
+            error e.toString()
             allStagesPassed = false
         }
     }
