@@ -43,7 +43,7 @@ def execute() {
             echo "RAMA = ${env.GIT_BRANCH}"
             echo "BUILD =${env.BUILD_NUMBER}"
             
-            define reponame = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
+            def reponame = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
             echo "reponame =${reponame}"
             
             
