@@ -37,8 +37,8 @@ def execute() {
         try{
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
-            def scannerHome = tool 'sonar-server';
-            cho "scannerHome = ${scannerHome}"
+            def scannerHome = tool 'sonar-scanner';
+            echo "scannerHome = ${scannerHome}"
             
             withSonarQubeEnv(installationName: 'sonar-server') {
                 //sh './mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
