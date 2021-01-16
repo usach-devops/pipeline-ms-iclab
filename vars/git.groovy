@@ -1,5 +1,5 @@
 def diff(){
     figlet 'git diff'
-    sh 'git diff origin/main..origin/' + env.GIT_BRANCH +' --'
+    sh 'git diff main..' + env.GIT_BRANCH +' --'
 }
 return this
