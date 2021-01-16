@@ -8,7 +8,7 @@ def execute() {
         try{
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
-            sh './mvnwkk clean compile -e'
+            sh './mvnw clean compile -e'
         }catch (Exception e){
             executeError(e)
         }
@@ -90,14 +90,11 @@ def execute() {
 }
 
 def executeError(e) {
+    //error para output del pipeline mas detallado
     echo "OUTPUT ERROR ${e.toString()}"
-    println("OUTPUT ERROR "+e.toString());
-    
-    //Error para slack
+    //Error para slack desde post actions en ejecucion.groovy
     def message = env.ERROR_MESSAGE == '' || env.ERROR_MESSAGE == null ? "[Stage ${env.JENKINS_STAGE}] Pipeline aborted due stage failure" : env.ERROR_MESSAGE 
     error message
-    //error para output del pipeline mas detallado
-    //throw new Exception("${env.ERROR_MESSAGE} ${e.toString()}");
 
 }
 
