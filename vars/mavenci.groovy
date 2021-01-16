@@ -52,8 +52,9 @@ def execute() {
         }
     }
 
-      stage("Quality Gate"){
+    stage("Quality Gate"){
         try{
+            sleep(10)
             timeout(time: 15, unit: 'MINUTES') { // Just in case something goes wrong, pipeline will be killed after a timeout
                 def qg = waitForQualityGate // Reuse taskId previously collected by withSonarQubeEnv
                 echo "Status: ${qg.status}"
@@ -62,9 +63,10 @@ def execute() {
                 }
             }
         }catch (Exception e){
+            error e
             allStagesPassed = false
         }
-      }
+    }
 
 
     stage('nexusUpload') {
