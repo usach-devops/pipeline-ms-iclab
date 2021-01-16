@@ -8,7 +8,7 @@ def execute() {
         try{
             env.JENKINS_STAGE = env.STAGE_NAME
             echo env.JENKINS_STAGE
-            sh './mvnw clean compile -e'
+            sh './mvnwkk clean compile -e'
         }catch (Exception e){
             executeError(e)
         }
