@@ -13,6 +13,7 @@ def checkIfBranchExists(String branch) {
 
 def deleteBranch(String branch) {
     echo "deleteBranch"
+    sh 'git remote set-url origin https://mcontrerass:X1Ex1en!@github.com/usach-devops/ms-iclab.git'
     sh "git push origin --delete ${branch}"
 }
 
