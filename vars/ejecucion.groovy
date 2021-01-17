@@ -6,7 +6,7 @@ def call() {
             stage('Pipeline') {
                 steps {
                     script {
-						def tech = new validage.getTech()
+						def tech =  validate.getTech()
 						figlet 'Tecnologia: ' + tech
 						
                         def branchName = validate.getBranchName()
