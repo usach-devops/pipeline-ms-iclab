@@ -20,8 +20,14 @@ def deleteBranch(String branch) {
 def createBranch(String origin, String newBranch) {
     echo "origin:  ${origin}"
     echo "newBranch:  ${newBranch}"
-    sh '''
-        git remote set-url origin https://mcontrerass:X1Ex1en!@github.com/usach-devops/ms-iclab.git
+
+withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIAL_ID, usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+        script {
+            env.encodedPass=URLEncoder.encode(PASS, "UTF-8")
+        }
+        
+        sh '''
+        git remote set-url origin https://${USER}:${encodedPass}@github.com/usach-devops/ms-iclab.git
         
         git fetch -p
         git checkout '''+origin+'''; git pull origin '''+origin+''' 
@@ -30,6 +36,9 @@ def createBranch(String origin, String newBranch) {
         git checkout '''+origin+'''; git pull origin '''+origin+''' 
         git branch -d '''+newBranch+'''
     '''
+ } 
+
+  
     //git branch -d '''+newBranch+'''
 }
 
