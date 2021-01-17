@@ -26,7 +26,6 @@ def tag(branchto,tagname) {
     sh 'git checkout '+branchto
     sh 'git tag -a '+tagname+ ' -m  \" Etiquetado como  '+tagname+' \"'
     sh 'git push --tags'
-
 }
 
 return this
