@@ -19,8 +19,10 @@ def call() {
                         switch (branchName) {
                            case ['develop', 'feature']:
                                 pipelineci.execute()
+                                env.PIPELINE_TYPE='IC'
                                 break
                            case 'release':
+                                env.PIPELINE_TYPE='RELEASE'
                                 pipelinecd.execute()
                                 break
                             case 'main':
