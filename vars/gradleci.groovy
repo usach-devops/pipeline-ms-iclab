@@ -17,7 +17,7 @@ def execute() {
             def scannerHome = tool 'sonar-scanner';
             echo "scannerHome = ${scannerHome}"
             echo "JOB = ${env.JOB_NAME}"
-            echo "RAMA = ${env.GIT_BRANCH}"
+            echo "RAMA = ${validate.getValidBranchName()}"
             echo "BUILD =${env.BUILD_NUMBER}"
             
             def reponame = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
@@ -25,7 +25,7 @@ def execute() {
             
             
             withSonarQubeEnv(installationName: 'sonar-server') {        
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${reponame}-${env.GIT_BRANCH}-${env.BUILD_NUMBER} -Dsonar.java.binaries=build"
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${reponame}-${validate.getValidBranchName()}-${env.BUILD_NUMBER} -Dsonar.java.binaries=build"
             }
         }catch (Exception e){
             executeError(e)

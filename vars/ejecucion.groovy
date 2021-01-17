@@ -12,7 +12,7 @@ def call() {
 						
                         def branchName = validate.getBranchName()
 
-                        figlet env.GIT_BRANCH
+                        figlet validate.getValidBranchName()
                         println 'branch detectado ' + branchName
 
                         sh "printenv"

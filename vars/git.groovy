@@ -1,6 +1,6 @@
 def diff(){
     figlet 'git diff'
-    sh 'git diff origin/main..' + env.GIT_BRANCH
+    sh 'git diff origin/main..' + validate.getValidBranchName()
 }
 
 def merge(branchfrom, branchto) {
