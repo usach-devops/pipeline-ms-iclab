@@ -1,4 +1,3 @@
-import pipeline.*
 def call() {
     pipeline {
         agent any
@@ -7,16 +6,16 @@ def call() {
             stage('Pipeline') {
                 steps {
                     script {
-						def valida = new test.ValidateMethods()
-						figlet 'Tecnologia: ' + valida.getTech()
+						def tech =  validate.getTech()
+						figlet 'Tecnologia: ' + tech
 						
                         def branchName = validate.getBranchName()
 
-                        figlet validate.getValidBranchName()
-                        println 'branch detectado ' + branchName
+                        figlet 'Branch ' +validate.getValidBranchName()
+                        figlet 'Tipo branch ' + branchName
 
-                        sh "printenv"
-
+                        git.setCredential()
+                        
                         switch (branchName) {
                            case ['develop', 'feature']:
                                 pipelineci.execute()
@@ -29,7 +28,6 @@ def call() {
                                 error env.ERROR_MESSAGE
                                 break
                            default: 
-                                //Quizás existe una mejor forma de hacer esto
                                 env.ERROR_MESSAGE = 'Nombre de branch no cumple con las convenciones de gitflow'
                                 error env.ERROR_MESSAGE
                                 break
@@ -42,7 +40,7 @@ def call() {
         post {
             success {
                 script {
-                    notification.success();
+                    notification.success()
                 }
             }
             failure {
@@ -50,15 +48,14 @@ def call() {
                     echo 'env.ERROR_MESSAGE ='+env.ERROR_MESSAGE
                     //mensaje de error por defecto
                     if (env.ERROR_MESSAGE == '' || env.ERROR_MESSAGE == null) {
-                        notification.failure();
+                        notification.failure()
                     }else {
                         //cuando se agrega un mensaje "personalizado"
-                        notification.failure(env.ERROR_MESSAGE);
+                        notification.failure(env.ERROR_MESSAGE)
                     }
                 }
             }
         }
     }
 }
-
 return this
