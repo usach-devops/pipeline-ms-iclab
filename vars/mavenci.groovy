@@ -1,8 +1,11 @@
+import pipeline.*
+
 def execute() {
     def branchName = validate.getBranchName()
     //boolean allStagesPassed = true;
 
     println 'run maven ci'
+    def estado = "OK"
 
     stage('compile') {
         try{
@@ -86,11 +89,31 @@ def execute() {
         }
     }
 
-    if (branchName == 'develop') {
+    /*
+    stage("Git creds"){
+        withCredentials(usernamePassword(credentialsId: GIT_CREDS, passwordVariable: '50ed7c548a7b92631c8aa81577ef02b862e67b5b', usernameVariable: 'nicolashermosilla')
+        {
+            sh('''
+                git config --global credential.username {GIT_USERNAME}
+                git config --global credential.helper "!echo password={GITPASSWORD}; echo"
+            ''')
+        }
+    }
+    */
+
+    if (branchName == 'develop' && estado=="OK") {
         stage('gitCreateRelease') {
             try {
                 env.JENKINS_STAGE = env.STAGE_NAME
                 echo env.JENKINS_STAGE
+                def git = new git.GitMethods()
+
+                if (git.checkIfBranchExists('release-v1-1-1')) {
+                    git.deleteBranch('release-v1-1-1')
+                    git.createBranch(branchName, 'release-v1-1-1')
+                } else {
+                    git.createBranch(branchName, 'release-v1-1-1')
+                }
             }catch (Exception e){
                 executeError(e)
             }
@@ -100,6 +123,7 @@ def execute() {
 }
 
 def executeError(e) {
+    estado = "error"
     //error para output del pipeline mas detallado
     echo "OUTPUT ERROR ${e.toString()}"
     //Error para slack desde post actions en ejecucion.groovy
