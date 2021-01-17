@@ -24,9 +24,10 @@ def createBranch(String origin, String newBranch) {
         git checkout -b '''+newBranch+'''
         git remote set-url origin https://mcontrerass:X1Ex1en!@github.com/usach-devops/pipeline-ms-iclab.git
         git push origin '''+newBranch+'''
-        git checkout '''+origin+'''; git pull
         git branch -d '''+newBranch+'''
     '''
+
+    //git checkout '''+origin+'''; git pull
 }
 
 return this;
