@@ -1,8 +1,8 @@
 package pipeline.test
 //Validar el tipo de tecnología de la aplicación (ms, front, bff, etc)
 //USO : validateTech.get()
-def get() {
-   def tech = ['ms', 'front', 'bff']
+def getTech() {
+	def tech = ['ms', 'front', 'bff']
 	def repo = env.GIT_URL //.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
 	//println "Repo: ${repo}"
 
@@ -12,6 +12,11 @@ def get() {
 			return item
 		}
 	}
+}
+
+def version() {
+    def matcher = readFile('parametros.xml') =~ '<Version>(.+)</Version>'
+    return matcher ? matcher[0][1] : null
 }
 
 return this;

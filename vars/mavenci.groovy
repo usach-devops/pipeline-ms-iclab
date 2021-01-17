@@ -89,30 +89,20 @@ def execute() {
         }
     }
 
-    /*
-    stage("Git creds"){
-        withCredentials(usernamePassword(credentialsId: GIT_CREDS, passwordVariable: '50ed7c548a7b92631c8aa81577ef02b862e67b5b', usernameVariable: 'nicolashermosilla')
-        {
-            sh('''
-                git config --global credential.username {GIT_USERNAME}
-                git config --global credential.helper "!echo password={GITPASSWORD}; echo"
-            ''')
-        }
-    }
-    */
-
     if (branchName == 'develop' && estado=="OK") {
         stage('gitCreateRelease') {
             try {
                 env.JENKINS_STAGE = env.STAGE_NAME
                 echo env.JENKINS_STAGE
                 def git = new git.GitMethods()
+                def valida = new test.ValidateMethods()
+                def version = 'release-v'+valida.version()
 
-                if (git.checkIfBranchExists('release-v1-1-1')) {
-                    git.deleteBranch('release-v1-1-1')
-                    git.createBranch(branchName, 'release-v1-1-1')
+                if (git.checkIfBranchExists(version)) {
+                    git.deleteBranch(version)
+                    git.createBranch(branchName, version)
                 } else {
-                    git.createBranch(branchName, 'release-v1-1-1')
+                    git.createBranch(branchName, version)
                 }
             }catch (Exception e){
                 executeError(e)
