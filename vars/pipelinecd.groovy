@@ -64,7 +64,7 @@ def execute() {
 	stage('gitTagMaster') {
         env.JENKINS_STAGE = env.STAGE_NAME
         echo env.JENKINS_STAGE
-        git.tag('main','feature-v1-1-1')
+        git.tag('main',validate.getValidBranchName())
 	}	
 }
 
