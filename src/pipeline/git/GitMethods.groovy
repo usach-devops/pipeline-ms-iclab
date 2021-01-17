@@ -21,11 +21,11 @@ def createBranch(String origin, String newBranch) {
     echo "origin:  ${origin}"
     echo "newBranch:  ${newBranch}"
 
-withCredentials([usernamePassword(credentialsId: env.GIT_CREDENTIAL_ID, usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
         script {
             env.encodedPass=URLEncoder.encode(PASS, "UTF-8")
         }
-        
+
         sh '''
         git remote set-url origin https://${USER}:${encodedPass}@github.com/usach-devops/ms-iclab.git
         
