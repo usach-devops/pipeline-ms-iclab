@@ -17,6 +17,10 @@ def call() {
 
                         sh "printenv"
 
+                        withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'GIT-USER', passwordVariable: 'GIT-PASS')]) {
+                        }
+      
+
                         switch (branchName) {
                            case ['develop', 'feature']:
                                 pipelineci.execute()

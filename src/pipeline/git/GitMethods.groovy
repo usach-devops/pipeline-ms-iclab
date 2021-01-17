@@ -21,13 +21,10 @@ def createBranch(String origin, String newBranch) {
     echo "origin:  ${origin}"
     echo "newBranch:  ${newBranch}"
 
-withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-        script {
-            env.encodedPass=URLEncoder.encode(PASS, "UTF-8")
-        }
+ 
 
         sh '''
-        git remote set-url origin https://${USER}:${encodedPass}@github.com/usach-devops/ms-iclab.git
+        git remote set-url origin https://${GIT-USER}:${GIT-PASS}@github.com/usach-devops/ms-iclab.git
         
         git fetch -p
         git checkout '''+origin+'''; git pull origin '''+origin+''' 
@@ -36,7 +33,7 @@ withCredentials([usernamePassword(credentialsId: 'github-credential-lab', userna
         git checkout '''+origin+'''; git pull origin '''+origin+''' 
         git branch -d '''+newBranch+'''
     '''
- } 
+ 
 
   
     //git branch -d '''+newBranch+'''
