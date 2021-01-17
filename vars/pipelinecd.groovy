@@ -43,9 +43,9 @@ def execute() {
 	
     stage('gitMergeMaster') {
         try {
-            env.JENKINS_STAGE = env.STAGE_NAME
+            env.JENKINS_STAGE = validate.getValidBranchName()
             echo env.JENKINS_STAGE
-            git.merge(env.GIT_BRANCH,'main')
+            git.merge(validate.getValidBranchName(),'main')
         }catch (Exception e){
             executeError(e)
         }
@@ -53,9 +53,9 @@ def execute() {
 	
 	stage('gitMergeDevelop') {
         try {
-            env.JENKINS_STAGE = env.STAGE_NAME
+            env.JENKINS_STAGE = validate.getValidBranchName()
             echo env.JENKINS_STAGE
-            git.merge(env.GIT_BRANCH,'develop')
+            git.merge(validate.getValidBranchName(),'develop')
         }catch (Exception e){
             executeError(e)
         }
