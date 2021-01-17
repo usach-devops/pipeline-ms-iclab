@@ -16,9 +16,10 @@ def deleteBranch(String branch) {
 
 def createBranch(String origin, String newBranch) {
     sh '''
-        git fetch -p
+        git fetch -p;
         git checkout '''+origin+'''; git pull
         git checkout -b '''+newBranch+'''
+        git remote set-url origin https://mcontrerass:X1Ex1en!@github.com/gfdevops/pipeline-ms-iclab.git
         git push origin '''+newBranch+'''
         git checkout '''+origin+'''; git pull
         git branch -d '''+newBranch+'''
