@@ -95,7 +95,7 @@ def execute() {
                 env.JENKINS_STAGE = env.STAGE_NAME
                 echo env.JENKINS_STAGE
               
-                def version = 'release-v' + valida.version()
+                def version = 'release-v' + validate.version()
 
                 if (git.checkIfBranchExists(version)) {
                     git.deleteBranch(version)
