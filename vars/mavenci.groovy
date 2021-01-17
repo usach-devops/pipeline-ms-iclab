@@ -88,18 +88,20 @@ def execute() {
             executeError(e)
         }
     }
+
     if (branchName == 'develop' && estado=="OK") {
         stage('gitCreateRelease') {
             try {
                 env.JENKINS_STAGE = env.STAGE_NAME
                 echo env.JENKINS_STAGE
               
+                def version = 'release-v' + valida.version()
 
-                if (git.checkIfBranchExists('release-v1-1-1')) {
-                    git.deleteBranch('release-v1-1-1')
-                    git.createBranch(branchName, 'release-v1-1-1')
+                if (git.checkIfBranchExists(version)) {
+                    git.deleteBranch(version)
+                    git.createBranch(branchName, version)
                 } else {
-                    git.createBranch(branchName, 'release-v1-1-1')
+                    git.createBranch(branchName, version)
                 }
             }catch (Exception e){
                 executeError(e)
