@@ -1,6 +1,5 @@
 def diff(){
     figlet 'git diff'
-    sh 'git config --add remote.origin.fetch +refs/heads/main:refs/remotes/origin/main'
     sh 'git pull'
     sh 'git status'
     sh 'git branch'
