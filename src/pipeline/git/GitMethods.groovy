@@ -2,6 +2,7 @@ package pipeline.git
 
 def checkIfBranchExists(String branch) {
     def output = sh (script: "git ls-remote --heads origin ${branch}", returnStdout: true)
+    echo output
 
     if (output?.trim()) {
         return true
@@ -11,6 +12,7 @@ def checkIfBranchExists(String branch) {
 }
 
 def deleteBranch(String branch) {
+    echo "deleteBranch"
     sh "git push origin --delete ${branch}"
 }
 
