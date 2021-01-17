@@ -43,7 +43,6 @@ def deleteBranch(String branch) {
     echo 'deleteBranch'
     sh 'git remote set-url origin https://${GIT_USER}:${GIT_PASS}@github.com/usach-devops/ms-iclab.git'
     sh "git push origin --delete ${branch}"
-    sh 'git branch -d '+newBranch
 }
 
 def createBranch(String origin, String newBranch) {
@@ -52,14 +51,13 @@ def createBranch(String origin, String newBranch) {
 
     sh 'git remote set-url origin https://${GIT_USER}:${GIT_PASS}@github.com/usach-devops/ms-iclab.git'
     sh 'git branch -d '+ newBranch  +' || true'
+
     sh '''
         git fetch -p
         git checkout '''+origin+'''
         git pull origin '''+origin+'''
         git checkout -b '''+newBranch+'''
         git push origin '''+newBranch+'''
-        git checkout '''+origin+'''
-        git pull origin '''+origin+'''
         git branch -d '''+newBranch+'''
     '''
 }
