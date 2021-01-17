@@ -7,7 +7,7 @@ def merge(branchfrom, branchto) {
     figlet 'git merge'
     def merge_text = 'Merge '+branchfrom+' into '+branchto
     echo merge_text
-
+    sh 'git remote set-url origin https://mcontrerass:X1Ex1en!@github.com/usach-devops/ms-iclab.git'
     sh 'git checkout '+branchfrom 
     sh 'git pull origin '+branchfrom
     sh 'git checkout '+branchto
