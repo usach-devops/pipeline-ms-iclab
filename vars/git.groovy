@@ -1,5 +1,7 @@
 def diff(){
     figlet 'git diff'
+    sh 'git fecth --all'
+    sh 'git pull'
     sh 'git status'
     sh 'git branch'
     sh 'git remote -v'
