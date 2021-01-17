@@ -2,8 +2,6 @@ package pipeline.git
 
 def checkIfBranchExists(String branch) {
     
-    sh 'git branch --merged=main'
-
     def output = sh (script: "git ls-remote --heads origin ${branch}", returnStdout: true)
     echo 'branch existe: ' + output
 
@@ -30,10 +28,12 @@ def createBranch(String origin, String newBranch) {
         git remote set-url origin https://${GIT_USER}:${GIT_PASS}@github.com/usach-devops/ms-iclab.git
         git fetch -p
         git checkout '''+origin+''' 
-        git pull origin '''+origin+''' 
+        git pull origin '''+origin+'''
+        git branch -d '''+newBranch+'''
         git checkout -b '''+newBranch+'''
         git push origin '''+newBranch+'''
-        git checkout '''+origin+'''; git pull origin '''+origin+''' 
+        git checkout '''+origin+''' 
+        git pull origin '''+origin+''' 
         git branch -d '''+newBranch+'''
     '''
 }
