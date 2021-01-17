@@ -29,7 +29,6 @@ def createBranch(String origin, String newBranch) {
         git fetch -p
         git checkout '''+origin+''' 
         git pull origin '''+origin+'''
-        git branch -d '''+newBranch+'''
         git checkout -b '''+newBranch+'''
         git push origin '''+newBranch+'''
         git checkout '''+origin+''' 
