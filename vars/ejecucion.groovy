@@ -40,7 +40,7 @@ def call() {
         post {
             success {
                 script {
-                    notification.success();
+                    notification.success()
                 }
             }
             failure {
@@ -48,15 +48,14 @@ def call() {
                     echo 'env.ERROR_MESSAGE ='+env.ERROR_MESSAGE
                     //mensaje de error por defecto
                     if (env.ERROR_MESSAGE == '' || env.ERROR_MESSAGE == null) {
-                        notification.failure();
+                        notification.failure()
                     }else {
                         //cuando se agrega un mensaje "personalizado"
-                        notification.failure(env.ERROR_MESSAGE);
+                        notification.failure(env.ERROR_MESSAGE)
                     }
                 }
             }
         }
     }
 }
-
 return this
