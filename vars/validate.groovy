@@ -54,3 +54,8 @@ def getTech() {
 		}
 	}
 }
+
+def version() {
+    def matcher = readFile('parametros.xml') =~ '<Version>(.+)</Version>'
+    return matcher ? matcher[0][1] : null
+}
