@@ -15,11 +15,7 @@ def call() {
                         figlet 'Tipo branch ' + branchName
 
                         git.setCredential()
-
-
-                        }
-      
-
+                        
                         switch (branchName) {
                            case ['develop', 'feature']:
                                 pipelineci.execute()
