@@ -108,11 +108,11 @@ def execute() {
                 echo env.JENKINS_STAGE
                 def git = new git.GitMethods()
 
-                if (git.checkIfBranchExists('release-vxx-x-x')) {
-                    git.deleteBranch('release-vxx-x-x')
-                    git.createBranch(branchName, 'release-vxx-x-x')
+                if (git.checkIfBranchExists('release-v9-9-9')) {
+                    git.deleteBranch('release-v9-9-9')
+                    git.createBranch(branchName, 'release-v9-9-9')
                 } else {
-                    git.createBranch(branchName, 'release-vxx-x-x')
+                    git.createBranch(branchName, 'release-v9-9-9')
                 }
             }catch (Exception e){
                 executeError(e)
