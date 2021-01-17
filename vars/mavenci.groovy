@@ -96,7 +96,7 @@ def execute() {
                 echo env.JENKINS_STAGE
                 def git = new git.GitMethods()
                 def valida = new test.ValidateMethods()
-                def version = valida.version()
+                def version = 'release-v'+valida.version()
 
                 if (git.checkIfBranchExists(version)) {
                     git.deleteBranch(version)
