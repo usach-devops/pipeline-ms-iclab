@@ -17,7 +17,11 @@ def call() {
 
                         sh "printenv"
 
-                        withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'GIT-USER', passwordVariable: 'GIT-PASS')]) {
+                        withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                        
+                        env.GIT_USER=GIT_USER
+                        env.GIT_PASS=GIT_PASS
+
                         }
       
 
