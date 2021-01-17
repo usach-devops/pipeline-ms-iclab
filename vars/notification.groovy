@@ -13,11 +13,11 @@ def failure(msg) {
 }
 
 def success() {
-    def message= template + '[Resultado: Ok]'
+    def message= notification.template  + '[Resultado: Ok]'
     slackSend color: 'good', message: message, teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
 }
 
 def success(msg) {
-    def message= template + '[Resultado: Ok]'
+    def message= notification.template + '[Resultado: Ok]'
     slackSend color: 'good', message: message, teamDomain: 'devops-usach-2020', tokenCredentialId: 'slack-credentials'
 }
