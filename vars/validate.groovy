@@ -41,3 +41,16 @@ def isRelease(String branchName) {
     //return branchName =~ /^(*\/release-v[0-9]+)\-([0-9]+)\-([0-9]+)?$/
     return branchName =~ /(release-v[0-9]+)-([0-9]+)-([0-9]+)/
 }
+
+def getTech() {
+   def tech = ['ms', 'front', 'bff']
+	def repo = env.GIT_URL //.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+	//println "Repo: ${repo}"
+
+	for (item in tech) {
+		//println "Item: ${item}"
+    	if (repo.contains(item)) {
+			return item
+		}
+	}
+}

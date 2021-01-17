@@ -93,7 +93,7 @@ def execute() {
             try {
                 env.JENKINS_STAGE = env.STAGE_NAME
                 echo env.JENKINS_STAGE
-                def git = new git.GitMethods()
+              
 
                 if (git.checkIfBranchExists('release-v1-1-1')) {
                     git.deleteBranch('release-v1-1-1')

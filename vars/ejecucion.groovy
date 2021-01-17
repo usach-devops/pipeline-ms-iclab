@@ -1,4 +1,3 @@
-import pipeline.*
 def call() {
     pipeline {
         agent any
@@ -7,8 +6,8 @@ def call() {
             stage('Pipeline') {
                 steps {
                     script {
-						def tech = new test.validateTech()
-						figlet 'Tecnologia: ' + tech.get()
+						def tech = new validage.getTech()
+						figlet 'Tecnologia: ' + tech
 						
                         def branchName = validate.getBranchName()
 
