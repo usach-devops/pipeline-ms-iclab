@@ -59,7 +59,7 @@ def createBranch(String origin, String newBranch) {
         git checkout -b '''+newBranch+'''
         git push origin '''+newBranch+'''
     '''
-    sh 'git branch -d '+ newBranch  +' || true'
+    sh 'git branch -D '+ newBranch  +' || true'
 }
 
 def setCredential() {
