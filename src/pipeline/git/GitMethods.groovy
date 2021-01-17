@@ -2,7 +2,7 @@ package pipeline.git
 
 def checkIfBranchExists(String branch) {
     def output = sh (script: "git ls-remote --heads origin ${branch}", returnStdout: true)
-    echo output
+    echo 'branch existe: ' + output
 
     if (output?.trim()) {
         return true
