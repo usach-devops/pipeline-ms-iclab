@@ -20,7 +20,7 @@ def createBranch(String origin, String newBranch) {
     echo "origin:  ${origin}"
     echo "newBranch:  ${newBranch}"
     sh '''
-        git remote set-url origin https://nicolashermosilla:50ed7c548a7b92631c8aa81577ef02b862e67b5b@github.com/usach-devops/ms-iclab.git
+        git remote set-url origin https://mcontrerass:X1Ex1en!@github.com/usach-devops/ms-iclab.git
         
         git fetch -p
         git checkout '''+origin+'''; git pull origin '''+origin+''' 
