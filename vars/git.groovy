@@ -4,7 +4,7 @@ def diff() {
 }
 
 def merge(branchfrom, branchto) {
-    figlet 'git merge ' + branchfrom + ' -> ' branchto
+    figlet 'git merge ' + branchfrom + ' -> ' + branchto
     def merge_text = 'Merge ' + branchfrom + ' into ' + branchto
     echo merge_text
     sh 'git remote set-url origin https://${GIT_USER}:${GIT_PASS}@github.com/usach-devops/ms-iclab.git'
