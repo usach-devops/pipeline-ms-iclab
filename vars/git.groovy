@@ -1,6 +1,6 @@
 def diff(){
     figlet 'git diff'
-    sh 'git fecth --all'
+    sh 'git fetch --all'
     sh 'git pull'
     sh 'git status'
     sh 'git branch'
