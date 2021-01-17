@@ -89,6 +89,7 @@ def execute() {
         }
     }
 
+    /*
     stage("Git creds"){
         withCredentials(usernamePassword(credentialsId: GIT_CREDS, passwordVariable: '50ed7c548a7b92631c8aa81577ef02b862e67b5b', usernameVariable: 'nicolashermosilla')
         {
@@ -98,6 +99,7 @@ def execute() {
             ''')
         }
     }
+    */
 
     if (branchName == 'develop' && estado=="OK") {
         stage('gitCreateRelease') {
