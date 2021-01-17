@@ -7,8 +7,8 @@ def call() {
             stage('Pipeline') {
                 steps {
                     script {
-						def tech = new test.validateTech()
-						figlet 'Tecnologia: ' + tech.get()
+						def valida = new test.ValidateMethods()
+						figlet 'Tecnologia: ' + valida.getTech()
 						
                         def branchName = validate.getBranchName()
 
@@ -60,7 +60,5 @@ def call() {
         }
     }
 }
-
-
 
 return this
