@@ -30,7 +30,6 @@ def isFeature(String branchName) {
 
 //USO : if (validate.isBranchName('develop')) {}
 def isBranchName(String branchName) {
-    //return branchName == env.GIT_BRANCH
     return branchName == getValidBranchName()
 }
 
@@ -38,17 +37,14 @@ def isBranchName(String branchName) {
 //release-v{major}-{minor}-{patch}
 //USO :  if (validate.validateReleaseNameFormat('release-v1-0-0')) {  echo 'OK' }
 def isRelease(String branchName) {
-    //return branchName =~ /^(*\/release-v[0-9]+)\-([0-9]+)\-([0-9]+)?$/
     return branchName =~ /(release-v[0-9]+)-([0-9]+)-([0-9]+)/
 }
 
 def getTech() {
    def tech = ['ms', 'front', 'bff']
-	def repo = env.GIT_URL //.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
-	//println "Repo: ${repo}"
+	def repo = env.GIT_URL
 
 	for (item in tech) {
-		//println "Item: ${item}"
     	if (repo.contains(item)) {
 			return item
 		}
@@ -59,3 +55,15 @@ def version() {
     def matcher = readFile('parametros.xml') =~ '<Version>(.+)</Version>'
     return matcher ? matcher[0][1] : null
 }
+
+def getBuildTool(){
+   if (fileExists('build.gradle')) {
+      return 'gradle'
+   }
+
+   if (fileExists('pom.xml')) {
+      return  'maven'
+   }
+   error "Archivo de compilación no existe. No se puede construir pipeline."
+}
+return this

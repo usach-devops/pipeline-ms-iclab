@@ -11,15 +11,11 @@ def call() {
 						
                         def branchName = validate.getBranchName()
 
-                        figlet validate.getValidBranchName()
-                        println 'branch detectado ' + branchName
+                        figlet 'Branch ' +validate.getValidBranchName()
+                        figlet 'Tipo branch ' + branchName
 
-                        sh "printenv"
+                        git.setCredential()
 
-                        withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
-                        
-                        env.GIT_USER=GIT_USER
-                        env.GIT_PASS=GIT_PASS
 
                         }
       
@@ -36,7 +32,6 @@ def call() {
                                 error env.ERROR_MESSAGE
                                 break
                            default: 
-                                //Quizás existe una mejor forma de hacer esto
                                 env.ERROR_MESSAGE = 'Nombre de branch no cumple con las convenciones de gitflow'
                                 error env.ERROR_MESSAGE
                                 break

@@ -1,14 +1,14 @@
 def execute() {
-    def tool = buildtool.get()
+    def tool = validate.getBuildTool()
 
     if (tool == 'gradle') {
         env.BUILD_TOOL = 'gradle'
         println env.BUILD_TOOL
-        gradleci.execute();
+        gradleci.execute()
     } else {
         env.BUILD_TOOL = 'maven'
         println env.BUILD_TOOL
-        mavenci.execute();
-    } 
+        mavenci.execute()
+    }
 }
 return this

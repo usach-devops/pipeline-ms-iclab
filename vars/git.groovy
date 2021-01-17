@@ -8,13 +8,13 @@ def merge(branchfrom, branchto) {
     def merge_text = 'Merge '+branchfrom+' into '+branchto
     echo merge_text
     sh 'git remote set-url origin https://${GIT_USER}:${GIT_PASS}@github.com/usach-devops/ms-iclab.git'
-    sh 'git checkout '+branchfrom 
+    sh 'git checkout '+branchfrom
     sh 'git pull origin '+branchfrom
     sh 'git checkout '+branchto
     sh 'git pull origin '+branchto
     sh 'git merge '+branchfrom
     sh 'git commit -am \" Merge '+branchfrom+' a '+branchto+' \"' + '|| true'
-    sh 'git push origin '+branchto 
+    sh 'git push origin '+branchto
 }
 
 def tag(branchto,tagname) {
@@ -29,7 +29,7 @@ def tag(branchto,tagname) {
 }
 
 def checkIfBranchExists(String branch) {
-    
+
     def output = sh (script: "git ls-remote --heads origin ${branch}", returnStdout: true)
     echo 'branch existe: ' + output
 
@@ -50,19 +50,24 @@ def createBranch(String origin, String newBranch) {
     echo "origin:  ${origin}"
     echo "newBranch:  ${newBranch}"
 
- 
-
         sh '''
         git remote set-url origin https://${GIT_USER}:${GIT_PASS}@github.com/usach-devops/ms-iclab.git
         git fetch -p
-        git checkout '''+origin+''' 
+        git checkout '''+origin+'''
         git pull origin '''+origin+'''
         git checkout -b '''+newBranch+'''
         git push origin '''+newBranch+'''
-        git checkout '''+origin+''' 
-        git pull origin '''+origin+''' 
+        git checkout '''+origin+'''
+        git pull origin '''+origin+'''
         git branch -d '''+newBranch+'''
     '''
+}
+
+def setCredential(){
+    withCredentials([usernamePassword(credentialsId: 'github-credential-lab', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+
+    env.GIT_USER=GIT_USER
+    env.GIT_PASS=GIT_PASS
 }
 
 return this
